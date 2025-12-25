@@ -37,7 +37,7 @@ const allowedNames = [
    =============================== */
 const giftPasswords = {
   Iron: "crispyamericanseaweed",
-  Suzy: "password2",
+  Suzy: "loveyearner",
   Robert: "password3",
   Bryan: "password4",
   Cullen: "password5",

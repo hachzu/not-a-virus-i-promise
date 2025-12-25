@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Suzy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Coming Soon", cursive;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      color: #80d3e7;                                          /* COLOR CHANGE */      
+    }
+
+    /* Fixed blurred background */
+    .bg {
+      position: fixed;
+      top: -40px;
+      left: -40px;
+      right: -40px;
+      bottom: -40px;
+      background: url('suzybg.png') center / cover no-repeat fixed;
+      filter: blur(13px) brightness(0.40);
+      z-index: -1;
+    }
+
+    /* Button */
+    .start-btn {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      width: fit-content;
+      height: fit-content;
+      padding: 14px 36px;
+      border-radius: 999px;
+      border: 1px solid #66abec;         /* COLOR CHANGE */
+      background: rgba(2, 6, 23, 0.45);                 /* COLOR CHANGE */
+      color: rgb(112, 217, 224);             /* COLOR CHANGE */  
+      font-size: 1.1rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: 
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        opacity 0.6s ease;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 25px rgba(195, 223, 250, 0.753);                   /* COLOR CHANGE */
+    }
+
+    .start-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Text */
+    .text {
+      position: relative;
+      padding: 8vh 10vw;
+      font-size: 1.6rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      text-shadow: 0 0 16px rgb(183, 228, 231);                 /* COLOR CHANGE */
+    }
+
+    /* cursor removed */
+    /* Skip button - subtle and pleasing */
+    .skip-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(219, 248, 57, 0.22);             /* COLOR CHANGE */
+      background: rgba(2,6,23,0.32);                /* COLOR CHANGE */
+      color: #1b86dd;                     /* COLOR CHANGE */    
+      font-size: 0.95rem;
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .skip-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .skip-btn:hover { transform: translateY(-2px); }
+    
+    /* Inserted image placeholder styling */
+    .inserted-img {
+      display: block;
+      margin: 18px auto;
+      max-width: 92%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+      opacity: 0;
+      transition: opacity 360ms ease, transform 360ms ease;
+      transform: translateY(6px);
+    }
+    .inserted-img.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+
+  <div class="text" id="text"></div>
+  <button class="start-btn" id="startBtn">...</button>
+  <button class="skip-btn" id="skipBtn" aria-label="Skip typing">Skip</button>
+
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const textEl = document.getElementById("text");
+
+    // keep a dedicated text node for typing (use `let` so we can switch nodes)
+    let textNode = document.createTextNode('');
+    textEl.appendChild(textNode);
+
+    // skip control and skip button
+    let skipRequested = false;
+    const skipBtn = document.getElementById('skipBtn');
+    function skipTyping() {
+      // close audio if running
+      if (audioCtx && typeof audioCtx.close === 'function') audioCtx.close().catch(()=>{});
+      audioCtx = null;
+      skipRequested = true;
+      // reveal full letter immediately
+      textNode.data = letter;
+      window.scrollTo(0, document.body.scrollHeight);
+      if (skipBtn) skipBtn.classList.remove('visible');
+    }
+    if (skipBtn) skipBtn.addEventListener('click', skipTyping);
+
+    const SPEEDS = { normal: 35, slow: 60 };
+
+    // WebAudio typing tick: created on first user gesture
+    let audioCtx = null;
+    function ensureAudio() {
+      if (audioCtx) return audioCtx;
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audioCtx = null; }
+      return audioCtx;
+    }
+
+    function playTick(ch) {
+      const ctx = audioCtx;
+      if (!ctx) return;
+      // avoid sound for regular spaces; allow for newlines/punctuation
+      if (/\s/.test(ch) && ch !== '\n') return;
+      const now = ctx.currentTime;
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      // lower-pitched, softer ticks
+      let freq = 320 + Math.random() * 80;            // letters: ~320-400Hz
+      if (/[.,:;!?]/.test(ch)) freq = 220 + Math.random() * 60; // punctuation: ~220-280Hz
+      if (/\n/.test(ch)) freq = 160;                 // newline: lower tone
+      o.type = 'sine';
+      o.frequency.setValueAtTime(freq, now);
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.linearRampToValueAtTime(0.40, now + 0.006); // lower peak volume
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(now); o.stop(now + 0.14);
+    }
+
+    // insert an image anywhere inside the `letter` text using the
+    // placeholder token format:
+    // [[IMG:filename.png|width|height|alt text]]
+    // - filename.png  : path relative to this HTML file (or absolute URL)
+    // - width         : e.g. 320 or 50% or auto (leave blank for default)
+    // - height        : e.g. 200 or auto (leave blank for default)
+    // - alt text      : optional alt text (no pipes allowed)
+    // Example inside the text: "...and then i drew this [[IMG:sketch.png|320|auto|sketch]] and kept writing."
+
+    const letter =
+  `hello suzy, you know what time it is... of course, it's the holiday season, and that means it's time for me to write you a special letter!
+
+i know you're a muslim and don't celebrate christmas (maybe), but i saw you greet people in the server so i thought, i'll just make you one instead of sending you one at new years! so this'll serve as both a holiday and new years letter from me to you. i coded this website all by myself, so i hope you like it! <3
+
+you know suzy, it is one hell of a year. so much has happened, the good, the bad, and the ugly. i've seen you go through a lot of stuff, and i just want to say that i'm really proud of you for making it through all that. you're one strong person, and i admire that about you.
+
+[[IMG:suzyhug.png|400|auto|suzy hug]]
+
+keep pushing forward, no matter what life throws at you. remember, every challenge is an opportunity to grow and learn. you've got this, saly. i believe in you.
+
+i'm also so lucky and i'm so glad that i got to be your friend this year, we've had some great times together, and i look forward to many more in the future. 
+
+i hope you do know when i say that you're my friend, i really do mean it. and that means i'll be here for you no matter what. through thick and thin, ups and downs, i'll be by your side. so don't hesitate to reach out if you ever need someone to talk to or just hang out with. you're not alone, suzy. you've got a friend in me. i don't ever want to see you sad or upset, so please, if you need help, reach out, if you need someone to listen to you, reach out. i'm not just the only friend you can only count on, you have others too, and i'm happy that you do. you're a wonderful person, suzy, and you deserve all the happiness in the world.
+
+you're amazing, you're funny, and you're kind. you always are in search for love and friendship, and that's what i like about you as a person. you're always willing to help others, and you have a heart of gold. never change who you are, suzy, because you're perfect just the way you are. but of course, never let people walk all over you or use you. you're worth so much more than that.
+
+oh yeah… do you remember when we first met? it was in death in the box. it was kind of funny actually. you were totally clueless about how to play, and the game always made it feel like it was so you. you’re kind of clueless about a lot of things in the same way, but in this really cute, silly way that just makes you… you. XD
+
+anyway, saly, i hope you're having a great day today and more importantly, a great year ahead of you. may all your dreams come true, and may you find happiness and success in everything you do. don't u dare give up on yourself. you're capable of amazing things, and i can't wait to see all the incredible things you'll accomplish in the coming year. ^^
+
+[[IMG:suzyfall.png|400|auto|suzy fallin]]
+
+love ya lots, saly.
+
+- hazu
+
+`;
+
+
+    // split the editable template into paragraphs (keeps the source easy to edit)
+    const rawText = letter.split('\n\n').map(p => ({ text: p + '\n\n', speed: 'normal' }));
+    // small tweak: make the opening paragraph a bit slower
+    if (rawText[0]) rawText[0].speed = 'slow';
+    if (rawText[12]) rawText[12].speed = 'slow';
+    if (rawText[13]) rawText[13].speed = 'slow';
+
+
+    function typeWriter(arr, index = 0, charIndex = 0) {
+      if (skipRequested) return;
+      if (index >= arr.length) {
+        if (skipBtn) skipBtn.classList.remove('visible');
+        return;
+      }
+
+      const part = arr[index];
+      if (charIndex < part.text.length) {
+        // detect image placeholder at current position
+        const remaining = part.text.slice(charIndex);
+        const imgMatch = remaining.match(/^\[\[IMG:([^\|\]]+)(?:\|([^\|\]]*))?(?:\|([^\|\]]*))?(?:\|([^\]]*))?\]\]/);
+        if (imgMatch) {
+          // imgMatch groups: [full, src, width, height, alt]
+          const [full, src, w, h, alt] = imgMatch;
+          // insert image element inline at the current typing position
+          const img = document.createElement('img');
+          img.className = 'inserted-img';
+          img.src = src.trim();
+          if (w && w.trim()) img.style.width = w.trim();
+          if (h && h.trim()) img.style.height = h.trim();
+          if (alt && alt.trim()) img.alt = alt.trim();
+          else img.alt = '';
+          // place the image immediately after the current text node
+          const afterNode = textNode.nextSibling;
+          textEl.insertBefore(img, afterNode);
+          // create a new text node after the image to receive subsequent typing
+          const newTextNode = document.createTextNode('');
+          textEl.insertBefore(newTextNode, img.nextSibling);
+          // switch typing target to the new node so future characters go after the image
+          textNode = newTextNode;
+          // animate in once loaded (or immediately)
+          img.addEventListener('load', () => img.classList.add('visible'));
+          setTimeout(() => img.classList.add('visible'), 200);
+          // advance charIndex past the marker and continue
+          const skipLen = full.length;
+          setTimeout(() => typeWriter(arr, index, charIndex + skipLen), 50);
+          return;
+        }
+
+        const ch = part.text.charAt(charIndex);
+        if (skipRequested) return;
+        textNode.data += ch;
+        // sound per character (if audio initialized)
+        playTick(ch);
+        // keep the page scrolled to the bottom as content grows
+        window.scrollTo(0, document.body.scrollHeight);
+        // add pauses after punctuation to improve pacing
+        let delay = SPEEDS[part.speed];
+        if (ch === '.') delay += 850;            // longer pause after period
+        else if (ch === '?' || ch === '!') delay += 400; // question/exclamation pause
+        else if (ch === ',') delay += 400;      // short pause for commas
+        else if (ch === ';' || ch === ':') delay += 400; // medium pause for semicolon/colon
+        setTimeout(() => typeWriter(arr, index, charIndex + 1), delay);
+      } else {
+        setTimeout(() => typeWriter(arr, index + 1, 0), 400);
+      }
+    }
+
+    startBtn.addEventListener("click", async () => {
+      startBtn.classList.add("hidden");
+      // show skip button
+      if (skipBtn) skipBtn.classList.add('visible');
+      // initialize/resume audio on user gesture
+      const ctx = ensureAudio();
+      if (ctx && ctx.state === 'suspended') await ctx.resume();
+      typeWriter(rawText);
+    });
+  </script>
+
+</body>
+</html>
