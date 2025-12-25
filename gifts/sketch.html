@@ -69,7 +69,7 @@
     .text {
       position: relative;
       padding: 8vh 10vw;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       line-height: 1.9;
       white-space: pre-wrap;
       text-shadow: 0 0 16px rgba(131, 86, 189, 1);
@@ -101,7 +101,7 @@
 
     .skip-btn:hover { transform: translateY(-2px); }
     
-    /* Inserted image placeholder styling */
+     /* Inserted image placeholder styling */
     .inserted-img {
       display: block;
       margin: 18px auto;
@@ -188,17 +188,41 @@
     // Example inside the text: "...and then i drew this [[IMG:sketch.png|320|auto|sketch]] and kept writing."
 
     const letter =
-  ` test
-  test
-  test
+  ` hello, you. the one reading this letter right now...
 
-[[IMG:sketchpoint.png|50|50|asketch point]]
+[[IMG:sketchpoint2.png|400|auto|sketch1]]
+
+... yes, you. don’t act dumb, YOU. SKETCH!
+
+HELLOO :3 i’m really glad you opened this letter!! it might not be much, but i really wanted to give you something a little special for being such a great friend to me all this time c:
+
+and of course, since it’s christmas, this is my little gift to you! i hope you like it ^^
+
+... (listen, i know i could’ve sent this over dms or text or in a short form, but i just felt like doing this by making a website, so i hope you’re okay with it, even though it’s a little scuffed.)
+
+i miss you btw :( it’s been a while since we’ve played and hung out together, and i’m not joking when i say i’d really like to play again sometime. but i also understand that you need time for yourself, so take all the time you need. if you’re not having a good day today, then i hope this makes it even just a tiny bit better. and if you are having a good day, then i hope it makes it even nicer somehow.
+
+i hope you’re taking care of yourself. i hope you’re eating properly, resting when you need to, and not being too hard on yourself. you deserve kindness, especially from yourself. i’ve seen bits and pieces of what you’ve been through, and i really hope you don’t have to go through those kinds of rough things again.
+
+i also know we’ve had some awkward or messy moments, like me being unavailable sometimes, or accidentally sending mixed signals, or even hurting your feelings without meaning to. for that, i’m genuinely sorry, and i appreciate your patience with me more than you probably know.
+
+i just wanted you to know that i appreciate you for who you are, not just for the fun moments, but for the way you show up as a friend. you’re easy to talk to, you listen, and you make things feel lighter just by being around. that’s not something everyone can do, and it’s something i really value. i’m also really glad i met you at all. it’s kind of funny that it started with me accidentally greeting you a happy birthday when i mistook the date, but honestly i’m really thankful that mistake happened.
+
+even when we don’t talk for a while, or life gets busy on either side, i never feel like the connection just disappears. it just goes quiet for a bit, and then picks up again when it can! ^^ i think that’s a good kind of friendship, one that doesn’t demand constant attention but still feels steady and real :]
+
+i hope next year gives you more chances to do the things you enjoy too! more moments that make you laugh, and fewer days that feel heavy or stressful. i hope you get to grow into whatever version of yourself you’re aiming for, at your own pace, in your own way. i know it's hard for you, but still! i believe in you.
+
+anyway, that’s all i really wanted to add. thank you for being a part of my life, lovely. and thank you for being the kind of friend that makes things better just by being there.
+
+merry christmas again, sketchiline. i hope the rest of your holiday is good to u, if not i'm coming to beat them up. ilysm! /p :D
+
+[[IMG:sketchcat.png|400|auto|sketch2]]
 
 
-test
-test
 
-`;
+with lots of love, heyzu the e-kitty c:
+
+    `;
 
     // split the editable template into paragraphs (keeps the source easy to edit)
     const rawText = letter.split('\n\n').map(p => ({ text: p + '\n\n', speed: 'normal' }));

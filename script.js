@@ -47,7 +47,7 @@ const giftPasswords = {
   Ern: "password9",
   Jalbert: "password10",
   Ulrich: "password11",
-  Sketch: "password12",
+  Sketch: "gaycatlover",
   Lilly: "password13",
   Siffrin: "password14",
   Lya: "password15",
