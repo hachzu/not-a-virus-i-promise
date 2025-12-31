@@ -2,29 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Suzy</title>
+  <title>Bryan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abel:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --main-text: #80d3e7;
-      --glow: rgb(183, 228, 231);
+      --main-text: #f7f6f4;
+      --glow: rgb(243, 243, 243);
 
-      --button-border: #66abec;
-      --button-text: rgb(112, 217, 224);
-      --button-glow: rgba(195, 223, 250, 0.753);
+      --button-border: #e4e3e3;
+      --button-text: rgb(228, 227, 225);
+      --button-glow: rgba(46, 46, 45, 0.753);
       --button-bg: rgba(2, 6, 23, 0.45);
 
-      --skip-border: rgba(219, 248, 57, 0.22);
-      --skip-bg: rgba(2,6,23,0.32);
-      --skip-text: #1b86dd;
+      --skip-border: rgba(255, 255, 255, 0.233);
+      --skip-bg: rgba(236, 240, 16, 0);
+      --skip-text: #f3f2ed;
 
       --bg-brightness: 0.40;
       --bg-blur: 13px;
 
-      --img-shadow: rgba(0,0,0,0.35);
+      --img-shadow: rgba(240, 239, 238, 0.747);
+      --font-size: 2.0rem;
+    }
+
+
+    .special-word {
+    color: #ff0000; 
+    text-shadow: 0 0 12px #ff0000; 
     }
 
     * {
@@ -35,7 +42,7 @@
 
     body {
       min-height: 100vh;
-      font-family: "Coming Soon", cursive;
+      font-family: "Abel", cursive;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       color: var(--main-text);
@@ -47,7 +54,7 @@
       left: -40px;
       right: -40px;
       bottom: -40px;
-      background: url('suzybg.png') center / cover no-repeat fixed;
+      background: url('bryanbg.png') center / cover no-repeat fixed;
       filter: blur(var(--bg-blur)) brightness(var(--bg-brightness));
       z-index: -1;
       will-change: transform;
@@ -84,7 +91,7 @@
     .text {
       position: relative;
       padding: 8vh 10vw;
-      font-size: 1.6rem;
+      font-size: var(--font-size);
       line-height: 1.9;
       white-space: pre-wrap;
       text-shadow: 0 0 16px var(--glow);
@@ -109,7 +116,7 @@
       border: 1px solid var(--skip-border);
       background: var(--skip-bg);
       color: var(--skip-text);
-      font-size: 0.95rem;
+      font-size: 0.8rem;
       backdrop-filter: blur(6px);
       cursor: pointer;
       transition: transform 0.18s ease, opacity 0.18s ease;
@@ -145,7 +152,7 @@
 
   <div class="text" id="text"></div>
   <button class="start-btn" id="startBtn">...</button>
-  <button class="skip-btn" id="skipBtn" aria-label="Skip typing">Skip</button>
+  <button class="skip-btn" id="skipBtn" aria-label="Skip typing">Skip (may cause issues!)</button>
 
   <script>
     const startBtn = document.getElementById("startBtn");
@@ -233,92 +240,114 @@
     }
 
     const letter = `
-hello suzy, you know what time it is... of course, it's the holiday season, and that means it's time for me to write you a special letter!
+hi rob, you just clicked on a link that can give me access to your computer, {{special}}and will probably retrieve your passwords and be sent to me.{{/special}}
 
-i know you're a muslim and don't celebrate christmas (maybe), but i saw you greet people in the server so i thought, i'll just make you one instead of sending you one at new years! so this'll serve as both a holiday and new years letter from me to you. i coded this website all by myself, so i hope you like it! <3
+just kidding lol. well anyways,
 
-you know suzy, it is one hell of a year. so much has happened, the good, the bad, and the ugly. i've seen you go through a lot of stuff, and i just want to say that i'm really proud of you for making it through all that. you're one strong person, and i admire that about you.
+happy new year, robert!! and while i know this is one of those niche letters i barely do, i still wanted to make this for you, because you are my genuine friend and i appreciate you a lot since we've been friends.
 
-[[IMG:suzyhug.png|400|auto|suzy hug]]
+[[IMG:robertdon.png|150|150|Robert peak]]
 
-keep pushing forward, no matter what life throws at you. remember, every challenge is an opportunity to grow and learn. you've got this, saly. i believe in you.
+you are probably enjoying canto 9 right now, so i hope you are having a great time with it. idk, you probably finished it by now 😭 get a life twin (jk).
 
-i'm also so lucky and i'm so glad that i got to be your friend this year, we've had some great times together, and i look forward to many more in the future. 
+but yeah, thank you for being such a great friend to me, for all the libres and free food you have given us, and for letting us crash at your parent’s office. that was peak. i notice and appreciate everything you have done for me and the others, and i hope you know that. every small thing you do, whether it is sharing something or just being around, adds so much to our group, and i want you to see that your efforts never go unnoticed.
 
-i hope you do know when i say that you're my friend, i really do mean it. and that means i'll be here for you no matter what. through thick and thin, ups and downs, i'll be by your side. so don't hesitate to reach out if you ever need someone to talk to or just hang out with. you're not alone, suzy. you've got a friend in me. i don't ever want to see you sad or upset, so please, if you need help, reach out, if you need someone to listen to you, reach out. i'm not just the only friend you can only count on, you have others too, and i'm happy that you do. you're a wonderful person, suzy, and you deserve all the happiness in the world.
+you are a great person, robert, and i hope you always remember that. you deserve all the good things in life, and i hope you get every single one of them. your kindness, your patience, and even the random chaotic energy you bring is something rare and special. honestly, i am really glad i met you, and sometimes i still think about how funny it is that it all started because i accidentally greeted you a happy birthday thinking you were someone else. that tiny mix-up somehow turned into one of the best friendships i could have asked for, and i am so thankful for it.
 
-you're amazing, you're funny, and you're kind. you always are in search for love and friendship, and that's what i like about you as a person. you're always willing to help others, and you have a heart of gold. never change who you are, suzy, because you're perfect just the way you are. but of course, never let people walk all over you or use you. you're worth so much more than that.
+this year was truly something else, with all the deadlines, academics, and drama we had to go through. damn bro, i could not have made it without all of you, especially with the new friend groups we formed, public quest and coco’s harem. all the chaos, the laughs, the small victories, the random moments we barely notice at the time, they all added up to something really memorable. you being there for all of that made a huge difference.
 
-oh yeah… do you remember when we first met? it was in death in the box. it was kind of funny actually. you were totally clueless about how to play, and the game always made it feel like it was so you. you’re kind of clueless about a lot of things in the same way, but in this really cute, silly way that just makes you… you. XD
+thank you for treating me like a good friend. i am genuinely grateful that i have met you and everyone else in our circle. y’all are special to me, really, and i hope you feel that. i hope that next year we can create even more ridiculous memories, finish even more tasks, and still find time to just hang out and have fun without worrying about anything else.
 
-anyway, saly, i hope you're having a great day today and more importantly, a great year ahead of you. may all your dreams come true, and may you find happiness and success in everything you do. don't u dare give up on yourself. you're capable of amazing things, and i can't wait to see all the incredible things you'll accomplish in the coming year. ^^
+i manifest 2026 to be a great year for you. i hope it brings good times with maegan, peace and happiness with your parents, and that all the things you have been struggling with finally turn out well. i hope it gives you more laughs than stress, more chill moments than chaos, and all the small little things that make life feel really good.
 
-[[IMG:suzyfall.png|400|auto|suzy fallin]]
+[[IMG:robgroup.jpg|150|150|trio!]]
 
-love ya lots, saly. /platonic
+hello... hello?? {{special}} goodbye. {{/special}}
 
-- hazu
-
-    `;
+- 愛を込めて, Lance <3
+`;
 
     const rawText = letter.split('\n\n').map(p => ({ text: p + '\n\n', speed: 'normal' }));
     if (rawText[0]) rawText[0].speed = 'slow';
-    if (rawText[12]) rawText[12].speed = 'slow';
-    if (rawText[13]) rawText[13].speed = 'slow';
 
-    function typeWriter(arr, index = 0, charIndex = 0) {
-      if (skipRequested) return;
-      if (index >= arr.length) {
-        if (skipBtn) skipBtn.classList.remove('visible');
+
+let special = false;
+
+function typeWriter(arr, index = 0, charIndex = 0) {
+  if (skipRequested) return;
+  if (index >= arr.length) {
+    if (skipBtn) skipBtn.classList.remove('visible');
+    return;
+  }
+
+  const part = arr[index];
+
+  if (charIndex < part.text.length) {
+    let remaining = part.text.slice(charIndex);
+
+    // Handle image tags first
+    if (remaining.startsWith('[[IMG:')) {
+      const imgMatch = remaining.match(/^\[\[IMG:([^\|\]]+)(?:\|([^\|\]]*))?(?:\|([^\|\]]*))?(?:\|([^\]]*))?\]\]/);
+      if (imgMatch) {
+        const [full, src, w, h, alt] = imgMatch;
+        const img = document.createElement('img');
+        img.className = 'inserted-img';
+        img.src = src.trim();
+        if (w && w.trim()) img.style.width = w.trim();
+        if (h && h.trim()) img.style.height = h.trim();
+        img.alt = alt?.trim() || '';
+        textEl.appendChild(img);
+        setTimeout(() => img.classList.add('visible'), 50);
+
+        // skip the image tag in text
+        charIndex += full.length;
+        setTimeout(() => typeWriter(arr, index, charIndex), 50);
         return;
       }
+    }
 
-      const part = arr[index];
-      if (charIndex < part.text.length) {
+    // Handle opening special tag
+    if (remaining.startsWith('{{special}}')) {
+      special = true;
+      charIndex += '{{special}}'.length; // skip marker completely
+      remaining = part.text.slice(charIndex);
+    }
 
-        const remaining = part.text.slice(charIndex);
-        const imgMatch = remaining.match(/^\[\[IMG:([^\|\]]+)(?:\|([^\|\]]*))?(?:\|([^\|\]]*))?(?:\|([^\]]*))?\]\]/);
-        if (imgMatch) {
-    const [full, src, w, h, alt] = imgMatch;
-    const img = document.createElement('img');
-    img.className = 'inserted-img';
-    img.src = src.trim();
-    if (w && w.trim()) img.style.width = w.trim();
-    if (h && h.trim()) img.style.height = h.trim();
-    if (alt && alt.trim()) img.alt = alt.trim();
-    else img.alt = '';
+    // Handle closing special tag
+    if (remaining.startsWith('{{/special}}')) {
+      special = false;
+      charIndex += '{{/special}}'.length; // skip marker completely
+      remaining = part.text.slice(charIndex);
+    }
 
-    // insert image exactly where typing currently is
-    textEl.appendChild(img);
+    // Check if we're past the end of the part after skipping tags
+    if (charIndex >= part.text.length) {
+      setTimeout(() => typeWriter(arr, index + 1, 0), 400);
+      return;
+    }
 
-    img.addEventListener('load', () => img.classList.add('visible'));
-     setTimeout(() => img.classList.add('visible'), 200);
+    // Type character
+    const ch = part.text.charAt(charIndex);
+    const span = document.createElement('span');
+    span.className = 'char';
+    if (special) span.classList.add('special-word'); 
+    span.textContent = ch;
+    textEl.appendChild(span);
 
-     const skipLen = full.length;
-    setTimeout(() => typeWriter(arr, index, charIndex + skipLen), 50);
-    return;
+    playTick(ch);
+    window.scrollTo(0, document.body.scrollHeight);
+
+    let delay = SPEEDS[part.speed];
+    if (ch === '.') delay += 850;
+    else if (ch === '?' || ch === '!') delay += 400;
+    else if (ch === ',' || ch === ';' || ch === ':') delay += 400;
+
+    setTimeout(() => typeWriter(arr, index, charIndex + 1), delay);
+  } else {
+    setTimeout(() => typeWriter(arr, index + 1, 0), 400);
+  }
 }
 
-        const ch = part.text.charAt(charIndex);
-        const span = document.createElement('span');
-        span.className = 'char';
-        span.textContent = ch;
-        textEl.appendChild(span);
-
-        playTick(ch);
-        window.scrollTo(0, document.body.scrollHeight);
-
-        let delay = SPEEDS[part.speed];
-        if (ch === '.') delay += 850;
-        else if (ch === '?' || ch === '!') delay += 400;
-        else if (ch === ',') delay += 400;
-        else if (ch === ';' || ch === ':') delay += 400;
-
-        setTimeout(() => typeWriter(arr, index, charIndex + 1), delay);
-      } else {
-        setTimeout(() => typeWriter(arr, index + 1, 0), 400);
-      }
-    }
 
     startBtn.addEventListener("click", async () => {
       startBtn.classList.add("hidden");

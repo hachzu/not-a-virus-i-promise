@@ -36,9 +36,9 @@ const allowedNames = [
    do not share it and do not open others' gift pages without permission)
    =============================== */
 const giftPasswords = {
-  Iron: "crispyamericanseaweed",
-  Suzy: "loveyearner",
-  Robert: "password3",
+  Iron: "seaweed",
+  Suzy: "lovefool",
+  Robert: "lilbroski",
   Bryan: "password4",
   Cullen: "password5",
   Teo: "password6",
@@ -47,13 +47,13 @@ const giftPasswords = {
   Ern: "password9",
   Jalbert: "password10",
   Ulrich: "password11",
-  Sketch: "gaycatlover",
+  Sketch: "gay",
   Lilly: "password13",
   Siffrin: "password14",
   Lya: "password15",
   Kaya: "password16",
   Remuwel: "password17",
-  Azzy: "orfevrelover",
+  Azzy: "orfevre",
   Axo: "password19",
   Tiz: "password20",
   Kaz: "password21",
