@@ -25,7 +25,7 @@ const allowedNames = [
   "Iron", "Suzy", "Robert", "Bryan", "Cullen", "Teo", "Malas",
   "Vinny", "Ern", "Jalbert", "Ulrich", "Sketch", "Lilly",
   "Siffrin", "Lya", "Kaya", "Remuwel", "Val", "Azzy", "Axo", "Tiz",
-  "Kaz", "Hal", "Akito", "Maegan", 
+  "Kaz", "Hal", "Akito", "Maegan", "Bri", "Marco"
 ];
 
 /* ===============================
@@ -45,8 +45,8 @@ const giftPasswords = {
   Malas: "password7",
   Vinny: "password8",
   Ern: "password9",
-  Jalbert: "password10",
-  Ulrich: "password11",
+  Jalbert: "racistahh",
+  Ulrich: "nonchalanter",
   Sketch: "gay",
   Lilly: "password13",
   Siffrin: "imnotgonnasugarcoatit",
